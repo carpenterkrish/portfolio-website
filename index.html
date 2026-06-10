@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Krish — Developer & Video Editor</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
+
+  :root {
+    --bg: #080810;
+    --surface: #0f0f1a;
+    --accent: #00ff88;
+    --text: #f0f0f0;
+    --muted: #8888aa;
+    --border: #1e1e30;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s;
+  }
+  nav.scrolled {
+    background: rgba(8,8,16,0.96);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0;
+  }
+  .logo span { color: var(--text); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .hero-glow {
+    position: absolute;
+    width: 480px; height: 480px;
+    background: radial-gradient(circle, rgba(124,58,237,0.1) 0%, transparent 70%);
+    top: 50%; left: 65%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 720px; }
+
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    animation: fadeUp 0.8s 0.2s both;
+  }
+  .hero-name {
+    font-size: clamp(2.8rem, 9vw, 6rem);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+    animation: fadeUp 0.8s 0.4s both;
+  }
+  .hero-name .accent { color: var(--accent); }
+  .hero-name .dim { color: var(--muted); }
+
+  .hero-badges {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.5s both;
+  }
+  .badge {
+    padding: 5px 14px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: 2px;
+  }
+  .badge.purple { border-color: #a855f7; color: #a855f7; }
+
+  .hero-desc {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.8;
+    margin-bottom: 36px;
+    animation: fadeUp 0.8s 0.6s both;
+  }
+  .hero-btns {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.8s both;
+  }
+  .btn-primary {
+    padding: 12px 28px;
+    background: var(--accent);
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 2px;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,255,136,0.3); }
+  .btn-outline {
+    padding: 12px 28px;
+    background: transparent;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.88rem;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* SECTIONS */
+  section { padding: 90px 40px; }
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: clamp(1.9rem, 4vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    margin-bottom: 50px;
+    line-height: 1.05;
+    color: var(--text);
+  }
+
+  /* SERVICES */
+  .services-section { background: var(--surface); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .service-card {
+    border: 1px solid var(--border);
+    padding: 32px 28px;
+    background: var(--bg);
+    border-radius: 4px;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: default;
+  }
+  .service-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+  .service-icon { font-size: 2rem; margin-bottom: 16px; display: block; }
+  .service-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+  .service-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+  }
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 28px 24px;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+    cursor: default;
+  }
+  .skill-card:hover { border-color: var(--accent); }
+  .skill-icon { font-size: 1.7rem; margin-bottom: 12px; display: block; }
+  .skill-name { font-size: 0.98rem; font-weight: 700; margin-bottom: 5px; color: var(--text); }
+  .skill-level { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--accent); letter-spacing: 1px; }
+  .skill-bar { margin-top: 12px; height: 3px; background: var(--border); border-radius: 2px; }
+  .skill-fill { height: 100%; background: var(--accent); width: 0; transition: width 1.2s ease; border-radius: 2px; }
+
+  /* PROJECTS */
+  .projects-section { background: var(--surface); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .project-card {
+    border: 1px solid var(--border);
+    padding: 32px 28px;
+    background: var(--bg);
+    border-radius: 4px;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: default;
+  }
+  .project-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+  .project-num { font-family: 'Space Mono', monospace; font-size: 0.66rem; color: var(--muted); letter-spacing: 2px; margin-bottom: 18px; }
+  .project-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; color: var(--text); letter-spacing: -0.3px; }
+  .project-desc { color: var(--muted); font-size: 0.85rem; line-height: 1.75; margin-bottom: 20px; }
+  .project-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag { font-family: 'Space Mono', monospace; font-size: 0.66rem; padding: 3px 9px; border: 1px solid var(--border); color: var(--muted); border-radius: 2px; }
+  .tag.hi { border-color: var(--accent); color: var(--accent); }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .about-text { font-size: 0.97rem; color: var(--muted); line-height: 1.85; }
+  .about-text p { margin-bottom: 16px; }
+  .about-text strong { color: var(--text); font-weight: 700; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .stat { background: var(--surface); border: 1px solid var(--border); padding: 28px 20px; text-align: center; border-radius: 4px; }
+  .stat-num { font-size: 2.4rem; font-weight: 900; color: var(--accent); letter-spacing: -1px; font-family: 'Space Mono', monospace; }
+  .stat-label { font-size: 0.7rem; font-weight: 600; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
+
+  /* CONTACT */
+  .contact-inner { max-width: 580px; margin: 0 auto; text-align: center; }
+  .contact-sub { color: var(--muted); margin-bottom: 40px; font-size: 0.95rem; line-height: 1.8; }
+  .contact-form { display: flex; flex-direction: column; gap: 12px; text-align: left; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label { font-family: 'Space Mono', monospace; font-size: 0.68rem; font-weight: 700; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+  .form-input, .form-textarea {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 12px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 400;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+    width: 100%;
+    border-radius: 2px;
+  }
+  .form-input:focus, .form-textarea:focus { border-color: var(--accent); }
+  .form-textarea { height: 110px; }
+  .form-submit {
+    padding: 14px;
+    background: var(--accent);
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: opacity 0.2s, transform 0.2s;
+    margin-top: 6px;
+    border-radius: 2px;
+  }
+  .form-submit:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .footer-copy { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--muted); }
+  .footer-links { display: flex; gap: 20px; align-items: center; }
+  .footer-links a {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .footer-links a:hover { color: var(--accent); }
+  .insta-link { color: #e1306c !important; }
+  .insta-link:hover { color: #ff6b9d !important; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 18px; }
+    .nav-links { display: none; }
+    section { padding: 64px 18px; }
+    .hero { padding: 0 18px; }
+    .hero-name { letter-spacing: -1.5px; }
+    .about-grid { grid-template-columns: 1fr; gap: 32px; }
+    footer { padding: 20px 18px; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="logo">&lt;<span>Krish</span>/&gt;</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <p class="hero-tag">// Available for freelance work</p>
+    <h1 class="hero-name">Hi, I'm<br><span class="accent">Krish</span><span class="dim">.</span></h1>
+    <div class="hero-badges">
+      <span class="badge">💻 Web Developer</span>
+      <span class="badge purple">🎬 Video Editor</span>
+    </div>
+    <p class="hero-desc">I build clean websites for businesses, hostels, shops &amp; studios — and create scroll-stopping reels &amp; videos. Full freelance package, one person.</p>
+    <div class="hero-btns">
+      <a href="#services" class="btn-primary">See My Services</a>
+      <a href="#contact" class="btn-outline">Hire Me</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="section-label">// What I Offer</div>
+  <h2 class="section-title reveal">My Services</h2>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="service-icon">🌐</span>
+      <div class="service-title">Business Website</div>
+      <div class="service-desc">Clean, fast, mobile-friendly websites for any business — shops, studios, hostels, restaurants, personal brands.</div>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">🎬</span>
+      <div class="service-title">Video Editing</div>
+      <div class="service-desc">Professional video editing for YouTube, Instagram Reels, ads, events, and brand promotions.</div>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">📱</span>
+      <div class="service-title">Reels & Short Videos</div>
+      <div class="service-desc">Scroll-stopping Instagram and YouTube Shorts — trending edits, transitions, and content that gets views.</div>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">⚙️</span>
+      <div class="service-title">Automation Tools</div>
+      <div class="service-desc">Python scripts and tools that save you hours — invoice generators, PDF processing, data automation.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">// What I Know</div>
+  <h2 class="section-title reveal">My Skills</h2>
+  <div class="skills-grid" id="skillsGrid">
+    <div class="skill-card reveal">
+      <span class="skill-icon">🐍</span>
+      <div class="skill-name">Python</div>
+      <div class="skill-level">Intermediate</div>
+      <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">🌐</span>
+      <div class="skill-name">HTML</div>
+      <div class="skill-level">Proficient</div>
+      <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">🎨</span>
+      <div class="skill-name">CSS</div>
+      <div class="skill-level">Proficient</div>
+      <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">⚡</span>
+      <div class="skill-name">JavaScript</div>
+      <div class="skill-level">Intermediate</div>
+      <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">⚙️</span>
+      <div class="skill-name">C++</div>
+      <div class="skill-level">Intermediate</div>
+      <div class="skill-bar"><div class="skill-fill" data-width="65"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <span class="skill-icon">🎬</span>
+      <div class="skill-name">Video Editing</div>
+      <div class="skill-level">Proficient</div>
+      <div class="skill-bar"><div class="skill-fill" data-width="82"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects-section" id="projects">
+  <div class="section-label">// What I've Built</div>
+  <h2 class="section-title reveal">Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <div class="project-num">001</div>
+      <div class="project-title">Auto Invoice Generator</div>
+      <div class="project-desc">A Windows desktop tool that reads work-order PDFs, auto-extracts data, and generates GST invoices, certificates &amp; Excel sheets in one click.</div>
+      <div class="project-tags">
+        <span class="tag hi">Python</span><span class="tag">PDF</span><span class="tag">Automation</span><span class="tag">Excel</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">002</div>
+      <div class="project-title">Business Website</div>
+      <div class="project-desc">A clean, responsive business website with contact form, spam protection, and mobile-first design. Ready to deploy.</div>
+      <div class="project-tags">
+        <span class="tag hi">HTML</span><span class="tag hi">CSS</span><span class="tag">JavaScript</span><span class="tag">Responsive</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">003</div>
+      <div class="project-title">More Coming Soon</div>
+      <div class="project-desc">Currently working on new projects — websites, reels, and tools. Have a project idea? Let's build it together!</div>
+      <div class="project-tags">
+        <span class="tag">Web</span><span class="tag">Video</span><span class="tag">Python</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">// Who I Am</div>
+  <div class="about-grid">
+    <div>
+      <h2 class="section-title reveal">About<br>Me.</h2>
+      <div class="about-text reveal">
+        <p>Hey! I'm <strong>Krish</strong> — a freelancer who does two things really well: <strong>building websites</strong> and <strong>editing videos</strong>.</p>
+        <p>Need a website for your shop, hostel, studio, or brand? I'll build it clean and fast. Need reels, YouTube edits, or promo videos? I handle that too.</p>
+        <p>I work with <strong>Python, C++, HTML, CSS &amp; JavaScript</strong> for dev work, and bring the same energy to video editing. One person, full package.</p>
+        <p>Currently <strong>open for freelance work</strong> — let's talk!</p>
+      </div>
+    </div>
+    <div class="about-stats reveal">
+      <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Skills</div></div>
+      <div class="stat"><div class="stat-num">2+</div><div class="stat-label">Services</div></div>
+      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Dedicated</div></div>
+      <div class="stat"><div class="stat-num">24h</div><div class="stat-label">Response</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background: var(--surface);">
+  <div class="contact-inner">
+    <div class="section-label" style="text-align:center">// Let's Work Together</div>
+    <h2 class="section-title reveal" style="margin-bottom:12px">Hire Me.</h2>
+    <p class="contact-sub reveal">Website, video, reels, or automation — whatever you need, let's get it done.</p>
+    <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label class="form-label">Your Name</label>
+        <input type="text" class="form-input" placeholder="Your name" required/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email or Instagram</label>
+        <input type="text" class="form-input" placeholder="email@example.com or @yourhandle" required/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">What do you need?</label>
+        <textarea class="form-textarea" placeholder="Website / Video / Reels / Automation — tell me more..." required></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send Message →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">© 2026 Krish. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="https://instagram.com/carpenter_krish_" target="_blank" class="insta-link">
+      📸 @carpenter_krish_
+    </a>
+    <a href="#">GitHub</a>
+    <a href="#">Freelancer</a>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const skillObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.skill-fill').forEach(bar => {
+          setTimeout(() => bar.style.width = bar.dataset.width + '%', 300);
+        });
+        skillObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  const sg = document.getElementById('skillsGrid');
+  if (sg) skillObs.observe(sg);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = '✓ Message Sent!';
+    btn.style.background = '#00cc6a';
+    setTimeout(() => {
+      btn.textContent = 'Send Message →';
+      btn.style.background = '';
+      e.target.reset();
+    }, 3000);
+  }
+</script>
+</body>
+</html>
