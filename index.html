@@ -342,6 +342,65 @@
     .about-grid { grid-template-columns: 1fr; gap: 32px; }
     footer { padding: 20px 18px; flex-direction: column; text-align: center; }
   }
+  /* FEATURED WEBSITES */
+
+.portfolio-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:24px;
+}
+
+.portfolio-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  overflow:hidden;
+  transition:.35s ease;
+}
+
+.portfolio-card:hover{
+  transform:translateY(-8px);
+  border-color:var(--accent);
+  box-shadow:0 15px 35px rgba(0,255,136,.15);
+}
+
+.portfolio-card img{
+  width:100%;
+  height:250px;
+  object-fit:cover;
+  display:block;
+}
+
+.portfolio-content{
+  padding:22px;
+}
+
+.portfolio-content h3{
+  color:var(--accent);
+  font-size:1.2rem;
+  margin-bottom:10px;
+}
+
+.portfolio-content p{
+  color:var(--muted);
+  line-height:1.7;
+  font-size:.9rem;
+}
+
+.portfolio-tech{
+  margin-top:15px;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.portfolio-tech span{
+  border:1px solid var(--accent);
+  color:var(--accent);
+  padding:4px 10px;
+  font-size:.7rem;
+  border-radius:20px;
+}
 </style>
 </head>
 <body>
@@ -480,7 +539,73 @@
     </div>
   </div>
 </section>
+<section id="portfolio">
 
+  <div class="section-label">// Recent Work</div>
+  <h2 class="section-title reveal">Featured Client Websites</h2>
+
+  <div class="portfolio-grid">
+
+    <div class="portfolio-card reveal">
+      <img src="WhatsApp Image 2026-06-10 at 4.49.25 PM.jpeg" alt="Restaurant Website">
+
+      <div class="portfolio-content">
+        <h3>Restaurant Website</h3>
+
+        <p>
+          Modern restaurant website with online menu,
+          food showcase, booking section and responsive design.
+        </p>
+
+        <div class="portfolio-tech">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>JavaScript</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-card reveal">
+      <img src="WhatsApp Image 2026-06-10 at 4.49.25 PM (1).jpeg" alt="Hotel Website">
+
+      <div class="portfolio-content">
+        <h3>Luxury Hotel Website</h3>
+
+        <p>
+          Premium hotel booking website featuring luxury rooms,
+          booking system and modern UI experience.
+        </p>
+
+        <div class="portfolio-tech">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>Responsive</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-card reveal">
+      <img src="WhatsApp Image 2026-06-10 at 4.49.24 PM.jpeg" alt="Store Website">
+
+      <div class="portfolio-content">
+        <h3>Online Store Website</h3>
+
+        <p>
+          E-commerce style website for local businesses with
+          product showcase and customer-friendly layout.
+        </p>
+
+        <div class="portfolio-tech">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>E-Commerce</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
 <!-- ABOUT -->
 <section id="about">
   <div class="section-label">// Who I Am</div>
@@ -566,16 +691,35 @@
   const sg = document.getElementById('skillsGrid');
   if (sg) skillObs.observe(sg);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('.form-submit');
-    btn.textContent = '✓ Message Sent!';
-    btn.style.background = '#00cc6a';
-    setTimeout(() => {
-      btn.textContent = 'Send Message →';
-      btn.style.background = '';
-      e.target.reset();
-    }, 3000);
+function handleSubmit(e) {
+  e.preventDefault();
+
+  const name =
+    document.querySelectorAll('.form-input')[0].value;
+
+  const contact =
+    document.querySelectorAll('.form-input')[1].value;
+
+  const requirement =
+    document.querySelector('.form-textarea').value;
+
+  const text =
+`🔥 New Client Inquiry
+
+👤 Name: ${name}
+
+📞 Contact: ${contact}
+
+📝 Project Details:
+${requirement}`;
+
+  window.open(
+    `https://wa.me/917803998864?text=${encodeURIComponent(text)}`,
+    '_blank'
+  );
+
+  e.target.reset();
+}
   }
 </script>
 </body>
