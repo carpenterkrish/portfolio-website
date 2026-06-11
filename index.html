@@ -85,7 +85,10 @@
     transform: translate(-50%, -50%);
     pointer-events: none;
   }
-  .hero-content { position: relative; z-index: 2; max-width: 720px; }
+ .hero-content {
+    position: relative;
+    z-index: 5;
+}
 
   .hero-tag {
     font-family: 'Space Mono', monospace;
@@ -509,6 +512,66 @@
 .client-card span{
     color:var(--muted);
 }
+  .anime-container{
+    position:absolute;
+    right:8%;
+    bottom:0;
+    z-index:2;
+    opacity:0;
+    animation: girlEntry 1.2s ease-out 1s forwards;
+}
+
+.anime-girl{
+    width:320px;
+    max-width:35vw;
+    filter: drop-shadow(0 0 25px rgba(0,255,136,.35));
+    animation: floatGirl 4s ease-in-out infinite;
+}
+
+.hi-bubble{
+    position:absolute;
+    top:40px;
+    left:-40px;
+    background:#00ff88;
+    color:#000;
+    padding:10px 18px;
+    border-radius:20px;
+    font-weight:700;
+    opacity:0;
+    transform:scale(.5);
+    animation:bubbleShow .5s ease 2.3s forwards;
+}
+
+@keyframes girlEntry{
+    0%{
+        opacity:0;
+        transform:translateX(220px);
+    }
+    70%{
+        opacity:1;
+        transform:translateX(-20px);
+    }
+    100%{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+@keyframes floatGirl{
+    0%,100%{
+        transform:translateY(0px);
+    }
+    50%{
+        transform:translateY(-12px);
+    }
+}
+
+@keyframes bubbleShow{
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
 </style>
 </head>
 <body>
@@ -531,6 +594,13 @@
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
   <div class="hero-content">
+    <div class="anime-container">
+    <img src="anime-girl.png" alt="Anime Girl" class="anime-girl">
+
+    <div class="hi-bubble">
+        Hii 👋
+    </div>
+</div>
     <p class="hero-tag">// Available for freelance work</p>
     <h1 class="hero-name">Hi, I'm<br><span class="accent">Krish</span><span class="dim">.</span></h1>
     <div class="hero-badges">
