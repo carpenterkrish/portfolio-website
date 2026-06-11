@@ -462,6 +462,53 @@
     color: #000;
     font-weight: bold;
 }
+  .clients-section{
+    padding:120px 48px;
+    background:var(--bg);
+}
+
+.clients-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:24px;
+}
+
+.client-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    padding:30px;
+    text-align:center;
+    text-decoration:none;
+    color:var(--text);
+    transition:.3s;
+}
+
+.client-card:hover{
+    border-color:var(--accent);
+    transform:translateY(-5px);
+}
+
+.client-card img{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    object-fit:cover;
+    margin-bottom:20px;
+}
+
+.client-card h3{
+    margin-bottom:10px;
+}
+
+.client-card p{
+    color:var(--accent);
+    margin-bottom:8px;
+    font-family:'Space Mono', monospace;
+}
+
+.client-card span{
+    color:var(--muted);
+}
 </style>
 </head>
 <body>
@@ -569,7 +616,21 @@
     </div>
   </div>
 </section>
+<!-- client -->
+  <section id="clients" class="clients-section">
+    <div class="section-label">// 03 — Trusted By</div>
+    <h2 class="section-title reveal">Featured Clients</h2>
 
+    <div class="clients-grid">
+
+        <a href="https://www.instagram.com/rolling_pokra?igsh=Z2xqcm1menE1ZWZ2 client1" target="_blank" class="client-card reveal">
+            <img src="file_000000003cb47207bbec6056b2e1ab58.png" alt="Client 1">
+            <h3> rolling_pokra 1</h3>
+            <p>393K+ Followers</p>
+            <span>@rolling_pokra 1</span>
+        </a>
+    </div>
+</section>
 <!-- PROJECTS -->
 <section class="projects-section" id="projects">
   <div class="section-label">// What I've Built</div>
@@ -695,14 +756,14 @@
             <div class="edit-icon">🎬</div>
             <h3>Short Reels</h3>
             <p>Instagram Reels, YouTube Shorts, Facebook Reels with smooth cuts, captions and effects.</p>
-            <span class="price">₹300 - ₹600</span>
+            <span class="price">₹600 - ₹1000</span>
         </div>
 
         <div class="editing-card reveal">
             <div class="edit-icon">📹</div>
             <h3>Long Videos</h3>
             <p>YouTube videos, vlogs, travel videos, cinematic edits and professional color correction.</p>
-            <span class="price">₹800 - ₹1500</span>
+            <span class="price">₹3000 - ₹15000</span>
         </div>
 
         <div class="editing-card reveal">
