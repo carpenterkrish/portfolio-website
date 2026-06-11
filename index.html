@@ -512,65 +512,57 @@
 .client-card span{
     color:var(--muted);
 }
-  .anime-container{
+ .hero-sphere{
     position:absolute;
-    right:8%;
-    bottom:0;
-    z-index:2;
-    opacity:0;
-    animation: girlEntry 1.2s ease-out 1s forwards;
+    right:10%;
+    top:50%;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    transform:translateY(-50%);
+    background:radial-gradient(
+        circle,
+        rgba(0,255,136,.8) 0%,
+        rgba(0,255,136,.25) 35%,
+        transparent 70%
+    );
+
+    filter:blur(20px);
+    animation:sphereFloat 6s ease-in-out infinite;
 }
 
-.anime-girl{
-    width:320px;
-    max-width:35vw;
-    filter: drop-shadow(0 0 25px rgba(0,255,136,.35));
-    animation: floatGirl 4s ease-in-out infinite;
-}
-
-.hi-bubble{
+.hero-sphere::before{
+    content:'';
     position:absolute;
-    top:40px;
-    left:-40px;
-    background:#00ff88;
-    color:#000;
-    padding:10px 18px;
-    border-radius:20px;
-    font-weight:700;
-    opacity:0;
-    transform:scale(.5);
-    animation:bubbleShow .5s ease 2.3s forwards;
+    inset:40px;
+    border:1px solid rgba(0,255,136,.4);
+    border-radius:50%;
 }
 
-@keyframes girlEntry{
-    0%{
-        opacity:0;
-        transform:translateX(220px);
-    }
-    70%{
-        opacity:1;
-        transform:translateX(-20px);
-    }
-    100%{
-        opacity:1;
-        transform:translateX(0);
-    }
+.hero-sphere::after{
+    content:'';
+    position:absolute;
+    inset:80px;
+    border:1px solid rgba(0,255,136,.3);
+    border-radius:50%;
 }
 
-@keyframes floatGirl{
+@keyframes sphereFloat{
     0%,100%{
-        transform:translateY(0px);
+        transform:translateY(-50%) translateX(0);
     }
     50%{
-        transform:translateY(-12px);
+        transform:translateY(-55%) translateX(15px);
     }
 }
-
-@keyframes bubbleShow{
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
+  #networkCanvas{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:1;
+    opacity:.6;
+    pointer-events:none;
 }
 </style>
 </head>
@@ -592,15 +584,11 @@
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-grid"></div>
+  <canvas id="networkCanvas"></canvas>
   <div class="hero-glow"></div>
+  <div class="hero-sphere"></div>
   <div class="hero-content">
-    <div class="anime-container">
-    <img src="anime-girl.png.png" alt="Anime Girl" class="anime-girl">
-
-    <div class="hi-bubble">
-        Hii 👋
-    </div>
-</div>
+    
     <p class="hero-tag">// Available for freelance work</p>
     <h1 class="hero-name">Hi, I'm<br><span class="accent">Krish</span><span class="dim">.</span></h1>
     <div class="hero-badges">
