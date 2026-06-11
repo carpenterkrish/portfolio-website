@@ -408,6 +408,60 @@
   font-size:.7rem;
   border-radius:20px;
 }
+  .editing-section {
+    background: var(--surface);
+}
+
+.editing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.editing-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 35px;
+    transition: 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.editing-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-5px);
+}
+
+.edit-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.editing-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+}
+
+.editing-card p {
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.price {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+}
+
+.price.free {
+    background: var(--accent);
+    color: #000;
+    font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -421,6 +475,7 @@
     <li><a href="#projects">Projects</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#editing">Editing</a></li>
   </ul>
 </nav>
 
@@ -628,7 +683,36 @@
       </div>
     </div>
   </div>
+<!-- editing section -->
+</section>
+  <section id="editing" class="editing-section">
+    <div class="section-label">// 04 — Video Editing</div>
+    <h2 class="section-title reveal">Editing Services</h2>
 
+    <div class="editing-grid">
+
+        <div class="editing-card reveal">
+            <div class="edit-icon">🎬</div>
+            <h3>Short Reels</h3>
+            <p>Instagram Reels, YouTube Shorts, Facebook Reels with smooth cuts, captions and effects.</p>
+            <span class="price">₹300 - ₹600</span>
+        </div>
+
+        <div class="editing-card reveal">
+            <div class="edit-icon">📹</div>
+            <h3>Long Videos</h3>
+            <p>YouTube videos, vlogs, travel videos, cinematic edits and professional color correction.</p>
+            <span class="price">₹800 - ₹1500</span>
+        </div>
+
+        <div class="editing-card reveal">
+            <div class="edit-icon">🚀</div>
+            <h3>Bonus Offer</h3>
+            <p>Website banwane wale clients ko 1 promotional reel bilkul FREE milegi.</p>
+            <span class="price free">FREE</span>
+        </div>
+
+    </div>
 </section>
 <!-- ABOUT -->
 <section id="about">
