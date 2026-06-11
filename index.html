@@ -512,7 +512,8 @@
 .client-card span{
     color:var(--muted);
 }
- .hero-sphere{
+
+.hero-sphere{
     position:absolute;
     right:10%;
     top:50%;
@@ -520,6 +521,8 @@
     height:350px;
     border-radius:50%;
     transform:translateY(-50%);
+    z-index:2;
+
     background:radial-gradient(
         circle,
         rgba(0,255,136,.8) 0%,
@@ -963,6 +966,80 @@ ${requirement}`;
 
   e.target.reset();
   }
+  const canvas = document.getElementById("networkCanvas");
+
+if(canvas){
+
+const ctx = canvas.getContext("2d");
+
+function resizeCanvas(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
+
+const particles = [];
+
+for(let i = 0; i < 50; i++){
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4
+    });
+}
+
+function animateNetwork(){
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    for(let i = 0; i < particles.length; i++){
+
+        const p = particles[i];
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,2,0,Math.PI*2);
+        ctx.fillStyle = "#00ff88";
+        ctx.fill();
+
+        for(let j = i + 1; j < particles.length; j++){
+
+            const q = particles[j];
+
+            const dx = p.x - q.x;
+            const dy = p.y - q.y;
+
+            const dist = Math.sqrt(dx*dx + dy*dy);
+
+            if(dist < 120){
+
+                ctx.beginPath();
+                ctx.moveTo(p.x,p.y);
+                ctx.lineTo(q.x,q.y);
+
+                ctx.strokeStyle =
+                `rgba(0,255,136,${1 - dist/120})`;
+
+                ctx.stroke();
+            }
+        }
+    }
+
+    requestAnimationFrame(animateNetwork);
+}
+
+animateNetwork();
+
+window.addEventListener("resize", resizeCanvas);
+
+}
 </script>
 </body>
 </html>
